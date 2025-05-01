@@ -12,8 +12,8 @@ const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'hu', name: 'Magyar', flag: '🇭🇺' }
+    { code: 'en', name: 'English', flag: 'https://flagcdn.com/w20/us.png', alt: 'US Flag' },
+    { code: 'hu', name: 'Magyar', flag: 'https://flagcdn.com/w20/hu.png', alt: 'Hungarian Flag' }
   ];
 
   const handleLanguageChange = (langCode: Language) => {
@@ -31,7 +31,7 @@ const LanguageSelector = () => {
         >
           <div className="flex items-center gap-1">
             <Flag size={16} className="mr-1" />
-            <span className="text-lg">{currentLang?.flag}</span>
+            <img src={currentLang?.flag} alt={currentLang?.alt} className="w-5 h-auto" />
           </div>
         </button>
       </DropdownMenuTrigger>
@@ -44,7 +44,7 @@ const LanguageSelector = () => {
             }`}
             onClick={() => handleLanguageChange(lang.code as Language)}
           >
-            <span className="text-lg">{lang.flag}</span>
+            <img src={lang.flag} alt={lang.alt} className="w-5 h-auto" />
             <span>{lang.name}</span>
           </DropdownMenuItem>
         ))}

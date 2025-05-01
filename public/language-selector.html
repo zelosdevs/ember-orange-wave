@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Selector</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #1c1c1c;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .language-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .language-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+    }
+    
+    .language-button:hover {
+      color: #FF7A00;
+    }
+    
+    .language-button img {
+      width: 20px;
+      height: auto;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #2a2a2a;
+      min-width: 120px;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      z-index: 1000;
+      overflow: hidden;
+    }
+    
+    .dropdown-content.show {
+      display: block;
+    }
+    
+    .language-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .language-item:hover {
+      background-color: #3a3a3a;
+    }
+    
+    .language-item.active {
+      color: #FF7A00;
+    }
+    
+    .language-item img {
+      width: 20px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="language-dropdown">
+    <button class="language-button" id="langButton">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2Z"/>
+        <path d="M9 2v20"/>
+        <path d="M14 2v20"/>
+        <path d="M2 9h20"/>
+        <path d="M2 14h20"/>
+      </svg>
+      <img id="currentFlag" src="https://flagcdn.com/w20/us.png" alt="US Flag">
+    </button>
+    
+    <div class="dropdown-content" id="languageDropdown">
+      <div class="language-item" data-lang="en">
+        <img src="https://flagcdn.com/w20/us.png" alt="US Flag">
+        <span>English</span>
+      </div>
+      <div class="language-item" data-lang="hu">
+        <img src="https://flagcdn.com/w20/hu.png" alt="Hungarian Flag">
+        <span>Magyar</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const langButton = document.getElementById('langButton');
+      const dropdown = document.getElementById('languageDropdown');
+      const currentFlag = document.getElementById('currentFlag');
+      const items = document.querySelectorAll('.language-item');
+      
+      // Load saved language or default to English
+      const currentLang = localStorage.getItem('language') || 'en';
+      setActiveLanguage(currentLang);
+      
+      // Toggle dropdown
+      langButton.addEventListener('click', function() {
+        dropdown.classList.toggle('show');
+      });
+      
+      // Close dropdown when clicking outside
+      window.addEventListener('click', function(e) {
+        if (!langButton.contains(e.target)) {
+          dropdown.classList.remove('show');
+        }
+      });
+      
+      // Language selection
+      items.forEach(item => {
+        item.addEventListener('click', function() {
+          const lang = this.getAttribute('data-lang');
+          setActiveLanguage(lang);
+          dropdown.classList.remove('show');
+          
+          // Save language preference
+          localStorage.setItem('language', lang);
+          
+          // You can add code to change the website language here
+          console.log('Language changed to:', lang);
+          
+          // Example of how you might reload the page with the new language
+          // window.location.search = `?lang=${lang}`;
+        });
+      });
+      
+      function setActiveLanguage(lang) {
+        items.forEach(item => {
+          if (item.getAttribute('data-lang') === lang) {
+            item.classList.add('active');
+            // Update the button flag
+            const flagImg = item.querySelector('img');
+            currentFlag.src = flagImg.src;
+            currentFlag.alt = flagImg.alt;
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
