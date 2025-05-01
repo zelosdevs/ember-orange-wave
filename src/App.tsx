@@ -30,7 +30,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <LoadingScreen />
+          {isLoading && <LoadingScreen />}
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />

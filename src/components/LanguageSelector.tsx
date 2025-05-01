@@ -1,7 +1,6 @@
 
-import { useState } from 'react';
 import { useLanguage, Language } from '@/contexts/LanguageContext';
-import { Globe } from 'lucide-react';
+import { Flag } from 'lucide-react';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -11,7 +10,6 @@ import {
 
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -20,7 +18,6 @@ const LanguageSelector = () => {
 
   const handleLanguageChange = (langCode: Language) => {
     setLanguage(langCode);
-    setIsOpen(false);
   };
 
   const currentLang = languages.find(lang => lang.code === language);
@@ -28,10 +25,14 @@ const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-1.5 text-white hover:text-fivem-orange transition-colors duration-300">
-          <Globe size={18} />
-          <span className="hidden md:inline-block">{currentLang?.flag} {currentLang?.name}</span>
-          <span className="md:hidden">{currentLang?.flag}</span>
+        <button 
+          className="flex items-center justify-center p-2 text-white hover:text-fivem-orange transition-colors duration-300"
+          aria-label="Select language"
+        >
+          <div className="flex items-center gap-1">
+            <Flag size={16} className="mr-1" />
+            <span className="text-lg">{currentLang?.flag}</span>
+          </div>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-fivem-gray-light border border-fivem-gray-dark">
