@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type StatProps = {
   value: number;
@@ -67,6 +68,8 @@ const StatCounter = ({ value, label, suffix = "", prefix = "", duration = 2000 }
 };
 
 const Stats = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-16 bg-gradient-to-r from-fivem-gray-dark to-black relative overflow-hidden">
       {/* Background elements */}
@@ -79,10 +82,10 @@ const Stats = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-4">
-          <StatCounter value={250} label="Active Players" suffix="+" />
-          <StatCounter value={100} label="Custom Vehicles" suffix="+" />
-          <StatCounter value={50} label="Custom Jobs" suffix="+" />
-          <StatCounter value={99} label="Server Uptime" suffix="%" />
+          <StatCounter value={350} label={t('stats.activePlayers')} suffix="+" />
+          <StatCounter value={300} label={t('stats.customVehicles')} suffix="+" />
+          <StatCounter value={75} label={t('stats.customJobs')} suffix="+" />
+          <StatCounter value={99.9} label={t('stats.serverUptime')} suffix="%" />
         </div>
       </div>
     </section>
