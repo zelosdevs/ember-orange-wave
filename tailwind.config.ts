@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				fivem: {
+					orange: '#FF7A00',
+					'orange-dark': '#FF5C00',
+					'gray-dark': '#1F1F1F',
+					'gray-light': '#2A2A2A',
 				}
 			},
 			borderRadius: {
@@ -84,11 +91,62 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					from: { 
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					to: { 
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'slide-in': {
+					from: { 
+						transform: 'translateY(-100%)',
+						opacity: '0'
+					},
+					to: { 
+						transform: 'translateY(0)',
+						opacity: '1'
+					}
+				},
+				'slide-in-right': {
+					from: { 
+						transform: 'translateX(100%)',
+						opacity: '0'
+					},
+					to: { 
+						transform: 'translateX(0)',
+						opacity: '1'
+					}
+				},
+				'pulse-orange': {
+					'0%, 100%': { 
+						boxShadow: '0 0 0 0 rgba(255, 122, 0, 0.7)'
+					},
+					'50%': { 
+						boxShadow: '0 0 0 15px rgba(255, 122, 0, 0)'
+					}
+				},
+				float: {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'slide-in': 'slide-in 0.5s ease-out forwards',
+				'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
+				'pulse-orange': 'pulse-orange 2s infinite',
+				'float': 'float 3s ease-in-out infinite'
 			}
 		}
 	},
