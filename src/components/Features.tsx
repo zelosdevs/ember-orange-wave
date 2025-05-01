@@ -1,41 +1,10 @@
 
 import { useEffect, useRef } from 'react';
-
-const featuresList = [
-  {
-    title: "Custom Economy",
-    description: "Fully balanced economy system with multiple jobs and career paths",
-    icon: "💰",
-  },
-  {
-    title: "Premium Vehicles",
-    description: "High-quality custom vehicles with unique handling and modifications",
-    icon: "🚗",
-  },
-  {
-    title: "Roleplay Focus",
-    description: "Immersive roleplay experience with custom scripts and scenarios",
-    icon: "🎭",
-  },
-  {
-    title: "Active Staff",
-    description: "Dedicated team of administrators and moderators available 24/7",
-    icon: "👮",
-  },
-  {
-    title: "Regular Events",
-    description: "Weekly events with exclusive rewards and unique gameplay experiences",
-    icon: "🎉",
-  },
-  {
-    title: "Custom Interiors",
-    description: "Detailed building interiors with interactive elements and props",
-    icon: "🏢",
-  },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Features = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,16 +34,48 @@ const Features = () => {
     };
   }, []);
   
+  const featuresList = [
+    {
+      title: "customEconomy",
+      description: "economyDesc",
+      icon: "💰",
+    },
+    {
+      title: "customVehicles",
+      description: "vehiclesDesc",
+      icon: "🚗",
+    },
+    {
+      title: "roleplayFocus",
+      description: "roleplayDesc",
+      icon: "🎭",
+    },
+    {
+      title: "activeStaff",
+      description: "staffDesc",
+      icon: "👮",
+    },
+    {
+      title: "regularEvents",
+      description: "eventsDesc",
+      icon: "🎉",
+    },
+    {
+      title: "customInteriors",
+      description: "interiorsDesc",
+      icon: "🏢",
+    },
+  ];
+  
   return (
     <section id="features" className="section-padding bg-fivem-gray-dark" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Server Features</span>
+            <span className="gradient-text">{t('features.title')}</span>
           </h2>
           <p className="text-gray-300">
-            Our server offers a wide range of custom features designed to enhance your gameplay experience 
-            and provide a unique roleplay environment.
+            {t('features.description')}
           </p>
         </div>
         
@@ -87,8 +88,8 @@ const Features = () => {
               <div className="mb-4 text-4xl bg-gradient-to-br from-fivem-orange to-fivem-orange-dark w-16 h-16 flex items-center justify-center rounded-lg shadow-lg group-hover:animate-pulse-orange">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-              <p className="text-gray-300">{feature.description}</p>
+              <h3 className="text-xl font-bold mb-2 text-white">{t(`features.${feature.title}`)}</h3>
+              <p className="text-gray-300">{t(`features.${feature.description}`)}</p>
             </div>
           ))}
         </div>

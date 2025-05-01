@@ -1,7 +1,10 @@
 
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section 
       id="home"
@@ -24,33 +27,33 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 space-y-6 text-center md:text-left opacity-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-              Welcome to <span className="gradient-text">Our FiveM Server</span>
+              {t('hero.welcome')} <span className="gradient-text">{t('hero.roleplay')}</span>
             </h1>
             <p className="text-lg text-gray-300 max-w-lg mx-auto md:mx-0">
-              Experience the ultimate roleplay adventure with our custom scripts, active community, and immersive environment
+              {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
               <Button className="orange-gradient text-white font-semibold px-8 py-6 rounded-md hover:brightness-110 transition-all duration-300 animate-pulse-orange">
-                Join Server Now
+                {t('hero.joinNow')}
               </Button>
               <Button variant="outline" className="border-fivem-orange text-fivem-orange hover:bg-fivem-orange/10">
-                Learn More
+                {t('hero.learnMore')}
               </Button>
             </div>
             <div className="flex items-center gap-6 justify-center md:justify-start pt-4">
               <div className="text-center">
                 <p className="text-3xl font-bold text-white">200+</p>
-                <p className="text-gray-400 text-sm">Active Players</p>
+                <p className="text-gray-400 text-sm">{t('hero.activePlayers')}</p>
               </div>
               <div className="h-10 w-px bg-gray-700"></div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-white">50+</p>
-                <p className="text-gray-400 text-sm">Custom Jobs</p>
+                <p className="text-gray-400 text-sm">{t('hero.customJobs')}</p>
               </div>
               <div className="h-10 w-px bg-gray-700"></div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-white">24/7</p>
-                <p className="text-gray-400 text-sm">Support</p>
+                <p className="text-gray-400 text-sm">{t('hero.support')}</p>
               </div>
             </div>
           </div>

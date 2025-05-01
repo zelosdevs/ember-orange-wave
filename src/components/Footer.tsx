@@ -1,8 +1,10 @@
 
 import { useEffect, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const { t } = useLanguage();
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -22,7 +24,7 @@ const Footer = () => {
           <div className="lg:col-span-1 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <h3 className="text-2xl font-bold gradient-text mb-6">FiveM Server</h3>
             <p className="text-gray-400 mb-6">
-              The ultimate FiveM roleplay experience with custom scripts, vehicles and an active community
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 bg-fivem-gray-light rounded-full flex items-center justify-center hover:bg-fivem-orange transition-colors duration-300">
@@ -41,29 +43,29 @@ const Footer = () => {
           </div>
 
           <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h4 className="text-lg font-bold text-white mb-6">Quick Links</h4>
+            <h4 className="text-lg font-bold text-white mb-6">{t('footer.quickLinks')}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Home</a></li>
-              <li><a href="#features" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Features</a></li>
-              <li><a href="#about" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">About</a></li>
-              <li><a href="#join" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Join Server</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Rules</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.home')}</a></li>
+              <li><a href="#features" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.features')}</a></li>
+              <li><a href="#about" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.about')}</a></li>
+              <li><a href="#join" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.joinServer')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.rules')}</a></li>
             </ul>
           </div>
 
           <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h4 className="text-lg font-bold text-white mb-6">Resources</h4>
+            <h4 className="text-lg font-bold text-white mb-6">{t('footer.resources')}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Discord Server</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Donation Store</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Server Rules</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Community Forum</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Development Blog</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.discordServer')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.donationStore')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.serverRules')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.communityForum')}</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.developmentBlog')}</a></li>
             </ul>
           </div>
 
           <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <h4 className="text-lg font-bold text-white mb-6">Contact Us</h4>
+            <h4 className="text-lg font-bold text-white mb-6">{t('footer.contactUs')}</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="mr-2 text-fivem-orange">📧</span>
@@ -75,7 +77,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-fivem-orange">💬</span>
-                <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Join our Discord</a>
+                <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.joinDiscord')}</a>
               </li>
             </ul>
           </div>
@@ -83,12 +85,12 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-gray-800 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <p className="text-gray-400">
-            &copy; {currentYear} Your FiveM Server. All rights reserved.
+            &copy; {currentYear} Your FiveM Server. {t('footer.rights')}
           </p>
           <div className="mt-4 flex justify-center space-x-6 text-sm">
-            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Terms of Service</a>
-            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">Cookie Policy</a>
+            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.privacyPolicy')}</a>
+            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.termsOfService')}</a>
+            <a href="#" className="text-gray-400 hover:text-fivem-orange transition-colors duration-300">{t('footer.cookiePolicy')}</a>
           </div>
         </div>
       </div>

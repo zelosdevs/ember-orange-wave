@@ -1,32 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
-
-const steps = [
-  {
-    title: "Install FiveM",
-    description: "Download and install the latest version of FiveM client from the official website",
-    link: "https://fivem.net/"
-  },
-  {
-    title: "Create an Account",
-    description: "Register on our website or Discord server to get full access to our features",
-    link: "#"
-  },
-  {
-    title: "Join Our Discord",
-    description: "Connect with our community, read rules and get server announcements",
-    link: "#"
-  },
-  {
-    title: "Connect to Server",
-    description: "Launch FiveM, press F8, and type 'connect serverIP' to join our world",
-    link: "#"
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const JoinServer = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,21 +38,44 @@ const JoinServer = () => {
   const [serverStatus, setServerStatus] = useState("Online");
   const [playerCount, setPlayerCount] = useState(142);
   
+  const steps = [
+    {
+      title: "step1",
+      description: "step1Desc",
+      link: "https://fivem.net/"
+    },
+    {
+      title: "step2",
+      description: "step2Desc",
+      link: "#"
+    },
+    {
+      title: "step3",
+      description: "step3Desc",
+      link: "#"
+    },
+    {
+      title: "step4",
+      description: "step4Desc",
+      link: "#"
+    }
+  ];
+  
   return (
     <section id="join" className="section-padding bg-black" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Join Our Server</span>
+            <span className="gradient-text">{t('joinServer.title')}</span>
           </h2>
           <p className="text-gray-300">
-            Follow these simple steps to join our community and start your roleplay adventure
+            {t('joinServer.description')}
           </p>
         </div>
         
         <div className="mb-16 bg-fivem-gray-light rounded-lg p-6 flex flex-col md:flex-row justify-between items-center">
           <div>
-            <p className="text-gray-300 mb-2">Server Status</p>
+            <p className="text-gray-300 mb-2">{t('joinServer.serverStatus')}</p>
             <div className="flex items-center">
               <span className={`inline-block w-3 h-3 rounded-full mr-2 ${serverStatus === "Online" ? "bg-green-500" : "bg-red-500"}`}></span>
               <p className="text-xl font-bold text-white">{serverStatus}</p>
@@ -81,22 +83,22 @@ const JoinServer = () => {
           </div>
           
           <div>
-            <p className="text-gray-300 mb-2">Server IP</p>
+            <p className="text-gray-300 mb-2">{t('joinServer.serverIp')}</p>
             <div className="flex items-center">
               <p className="text-xl font-bold text-white">play.yourserver.com</p>
               <Button variant="ghost" className="ml-2 text-fivem-orange hover:text-fivem-orange-dark" onClick={() => navigator.clipboard.writeText("play.yourserver.com")}>
-                Copy
+                {t('joinServer.copy')}
               </Button>
             </div>
           </div>
           
           <div>
-            <p className="text-gray-300 mb-2">Active Players</p>
+            <p className="text-gray-300 mb-2">{t('joinServer.activePlayers')}</p>
             <p className="text-xl font-bold text-white">{playerCount}<span className="text-gray-400">/256</span></p>
           </div>
           
           <Button className="orange-gradient text-white font-medium px-8 py-2 rounded-md hover:brightness-110 transition-all duration-300 mt-4 md:mt-0">
-            Connect Now
+            {t('joinServer.connectNow')}
           </Button>
         </div>
         
@@ -109,8 +111,8 @@ const JoinServer = () => {
               <div className="absolute -top-4 -left-4 bg-gradient-to-br from-fivem-orange to-fivem-orange-dark w-10 h-10 rounded-full flex items-center justify-center font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
                 {index + 1}
               </div>
-              <h3 className="text-xl font-bold mb-3 mt-2 text-white">{step.title}</h3>
-              <p className="text-gray-300 mb-4">{step.description}</p>
+              <h3 className="text-xl font-bold mb-3 mt-2 text-white">{t(`joinServer.${step.title}`)}</h3>
+              <p className="text-gray-300 mb-4">{t(`joinServer.${step.description}`)}</p>
               {step.link && (
                 <a 
                   href={step.link} 
@@ -118,7 +120,7 @@ const JoinServer = () => {
                   rel="noopener noreferrer" 
                   className="text-fivem-orange hover:text-fivem-orange-dark"
                 >
-                  Learn More →
+                  {t('joinServer.learnMore')} →
                 </a>
               )}
             </div>
