@@ -1,0 +1,1927 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FiveM Server - Advanced Roleplay</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-color: #333;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: rgb(30, 30, 30); /* bg-fivem-gray-dark */
+      color: rgb(248, 248, 248); /* text-foreground */
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section-padding {
+      padding: 5rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-padding {
+        padding: 5rem 2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-padding {
+        padding: 5rem 4rem;
+      }
+    }
+
+    /* Utility classes */
+    .gradient-text {
+      background: linear-gradient(to right, #FF7A00, #ee6002);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .orange-gradient {
+      background: linear-gradient(to right, #FF7A00, #ee6002);
+    }
+
+    .min-h-screen {
+      min-height: 100vh;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .text-gray-300 {
+      color: #d1d5db;
+    }
+
+    .text-gray-400 {
+      color: #9ca3af;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .space-x-10 > * + * {
+      margin-left: 2.5rem;
+    }
+
+    .space-x-6 > * + * {
+      margin-left: 1.5rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-16 {
+      margin-bottom: 4rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .rounded-md {
+      border-radius: 0.375rem;
+    }
+
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+
+    .rounded-full {
+      border-radius: 9999px;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .py-6 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-lg {
+      max-width: 32rem;
+    }
+
+    .max-w-3xl {
+      max-width: 48rem;
+    }
+
+    .z-50 {
+      z-index: 50;
+    }
+
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    .hover\:brightness-110:hover {
+      filter: brightness(1.1);
+    }
+
+    .hover\:text-fivem-orange:hover {
+      color: #FF7A00;
+    }
+
+    .hover\:bg-fivem-orange-10:hover {
+      background-color: rgba(255, 122, 0, 0.1);
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    .gap-8 {
+      gap: 2rem;
+    }
+    
+    .gap-10 {
+      gap: 2.5rem;
+    }
+    
+    .gap-12 {
+      gap: 3rem;
+    }
+
+    .fixed {
+      position: fixed;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    
+    .z-10 {
+      z-index: 10;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .top-0 {
+      top: 0;
+    }
+
+    .left-0 {
+      left: 0;
+    }
+
+    .w-5 {
+      width: 1.25rem;
+    }
+
+    .h-auto {
+      height: auto;
+    }
+    
+    .border {
+      border-width: 1px;
+    }
+    
+    .border-fivem-orange {
+      border-color: #FF7A00;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      transition: all 0.3s ease;
+      padding: 1.25rem 0;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(30, 30, 30, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-link {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #FF7A00;
+      left: 0;
+      bottom: -4px;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #FF7A00;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-button {
+      background: linear-gradient(to right, #FF7A00, #ee6002);
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.375rem;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.3s;
+    }
+
+    .nav-button:hover {
+      filter: brightness(1.1);
+    }
+
+    .mobile-menu-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(8px);
+      animation: slide-in 0.3s ease-out;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .mobile-menu a:hover {
+      color: #FF7A00;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 4rem;
+      overflow: hidden;
+      background: linear-gradient(to bottom, rgb(30, 30, 30), rgb(0, 0, 0));
+    }
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.1;
+      background-image: linear-gradient(#FF7A00 0.5px, transparent 0.5px), linear-gradient(to right, #FF7A00 0.5px, transparent 0.5px);
+      background-size: 50px 50px;
+    }
+
+    .hero-gradient-1 {
+      position: absolute;
+      top: 25%;
+      right: 25%;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 9999px;
+      background: linear-gradient(to right, rgba(255, 122, 0, 0.3), rgba(238, 96, 2, 0.3));
+      filter: blur(3rem);
+    }
+
+    .hero-gradient-2 {
+      position: absolute;
+      bottom: 25%;
+      left: 25%;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 9999px;
+      background: linear-gradient(to right, rgba(255, 122, 0, 0.2), rgba(238, 96, 2, 0.2));
+      filter: blur(3rem);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: center;
+      padding-top: 1rem;
+    }
+    
+    @media (min-width: 768px) {
+      .hero-stats {
+        justify-content: flex-start;
+      }
+    }
+
+    .hero-stat-divider {
+      height: 2.5rem;
+      width: 1px;
+      background-color: #4b5563;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .orange-glow {
+      box-shadow: 0 0 15px rgba(255, 122, 0, 0.6);
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .image-badge {
+      position: absolute;
+      bottom: -1rem;
+      right: -1rem;
+      background-color: rgb(30, 30, 30);
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(255, 122, 0, 0.5);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fade-in 1s ease-out;
+      animation-delay: 1s;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .scroll-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      background-color: #FF7A00;
+      border-radius: 9999px;
+      margin-top: 0.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    /* Features section */
+    .feature-card {
+      background-color: rgb(36, 36, 36);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 122, 0, 0.2);
+      transition: all 0.3s;
+      opacity: 0;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(255, 122, 0, 0.6);
+      transform: translateY(-0.25rem);
+    }
+
+    .feature-icon {
+      margin-bottom: 1rem;
+      font-size: 2.25rem;
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      background: linear-gradient(to bottom right, #FF7A00, #ee6002);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Stats section */
+    .stats-section {
+      padding: 4rem 0;
+      background: linear-gradient(to right, rgb(30, 30, 30), rgb(0, 0, 0));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.1;
+    }
+
+    .stats-gradient-1 {
+      position: absolute;
+      top: 25%;
+      left: -5rem;
+      width: 15rem;
+      height: 15rem;
+      border-radius: 9999px;
+      background-color: #FF7A00;
+      opacity: 0.1;
+      filter: blur(3rem);
+    }
+
+    .stats-gradient-2 {
+      position: absolute;
+      bottom: 33%;
+      right: 25%;
+      width: 20rem;
+      height: 20rem;
+      border-radius: 9999px;
+      background-color: #ee6002;
+      opacity: 0.1;
+      filter: blur(3rem);
+    }
+
+    .stat-counter {
+      text-align: center;
+    }
+
+    /* Join server section */
+    .step-card {
+      background-color: rgb(36, 36, 36);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 122, 0, 0.2);
+      position: relative;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+
+    .step-card:hover {
+      border-color: rgba(255, 122, 0, 0.5);
+    }
+
+    .step-number {
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      background: linear-gradient(to bottom right, #FF7A00, #ee6002);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .step-card:hover .step-number {
+      transform: scale(1.1);
+    }
+
+    .server-status {
+      margin-bottom: 4rem;
+      background-color: rgb(36, 36, 36);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .server-status {
+        flex-direction: row;
+      }
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 9999px;
+      margin-right: 0.5rem;
+    }
+
+    .status-online {
+      background-color: #10b981;
+    }
+
+    .status-offline {
+      background-color: #ef4444;
+    }
+
+    .copy-button {
+      background: none;
+      border: none;
+      color: #FF7A00;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .copy-button:hover {
+      color: #ee6002;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: rgb(30, 30, 30);
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-gradient-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, #FF7A00, #ee6002);
+    }
+
+    .footer-gradient-1 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 10rem;
+      height: 10rem;
+      background-color: #FF7A00;
+      opacity: 0.05;
+      border-radius: 9999px;
+      filter: blur(3rem);
+    }
+
+    .footer-gradient-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 15rem;
+      height: 15rem;
+      background-color: #ee6002;
+      opacity: 0.05;
+      border-radius: 9999px;
+      filter: blur(3rem);
+    }
+
+    .social-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: rgb(36, 36, 36);
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .social-icon:hover {
+      background-color: #FF7A00;
+    }
+
+    .footer-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-link {
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: #FF7A00;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      color: #FF7A00;
+      margin-right: 0.5rem;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid #374151;
+      text-align: center;
+    }
+
+    .footer-policy-links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    /* Language selector */
+    .language-selector {
+      position: relative;
+    }
+
+    .language-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgb(36, 36, 36);
+      border: 1px solid rgb(30, 30, 30);
+      border-radius: 0.375rem;
+      overflow: hidden;
+      display: none;
+      z-index: 100;
+    }
+
+    .language-dropdown.show {
+      display: block;
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    .language-option:hover {
+      background-color: rgb(30, 30, 30);
+    }
+
+    .language-option.active {
+      color: #FF7A00;
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes slide-in {
+      from {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .mobile-menu-button {
+        display: block;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .desktop-cta {
+        display: none;
+      }
+
+      .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+      
+      .md\:flex-row {
+        flex-direction: column;
+      }
+      
+      .text-center {
+        text-align: center;
+      }
+      
+      .md\:text-left {
+        text-align: center;
+      }
+      
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .md\:mx-0 {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      
+      .md\:flex-row {
+        flex-direction: row;
+      }
+      
+      .md\:text-left {
+        text-align: left;
+      }
+      
+      .md\:mx-0 {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .md\:justify-start {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      
+      .grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    /* Loading animation */
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+      background-color: rgba(30, 30, 30, 0.7);
+    }
+
+    .loading-content {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-progress {
+      position: relative;
+      width: 100%;
+      height: 0.5rem;
+      background-color: rgb(36, 36, 36);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .loading-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(to right, #FF7A00, #ee6002);
+      border-radius: 9999px;
+      transition: width 0.3s;
+    }
+
+    .loading-spinner {
+      animation: spin 2s linear infinite;
+      margin-right: 0.75rem;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-overlay"></div>
+      <div class="loading-content">
+        <div class="w-full max-w-md flex flex-col items-center gap-8">
+          <div class="text-4xl md:text-5xl font-bold gradient-text">
+            FiveM Server
+          </div>
+          
+          <div class="loading-progress w-full">
+            <div id="loadingProgressBar" class="loading-progress-bar" style="width: 0%"></div>
+          </div>
+          
+          <div class="flex items-center gap-3 text-white">
+            <svg class="loading-spinner text-fivem-orange" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+            </svg>
+            <p class="text-lg" id="loadingMessage">Loading...</p>
+          </div>
+          
+          <div class="text-sm text-gray-400 mt-8" id="loadingPercentage">
+            0%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <header id="navbar" class="navbar">
+      <nav class="container flex justify-between items-center px-4 md:px-8">
+        <!-- Logo -->
+        <div class="text-2xl font-bold gradient-text">
+          FiveM Server
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-10 desktop-nav">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#join" class="nav-link">Join Us</a>
+        </div>
+
+        <!-- Right Section with Language and CTA -->
+        <div class="hidden md:flex items-center space-x-6 desktop-cta">
+          <div class="language-selector">
+            <button id="languageButton" class="language-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <img id="currentFlag" src="https://flagcdn.com/w20/us.png" alt="US Flag" class="w-5 h-auto">
+            </button>
+            <div id="languageDropdown" class="language-dropdown">
+              <div class="language-option" data-lang="en">
+                <img src="https://flagcdn.com/w20/us.png" alt="US Flag" class="w-5 h-auto">
+                <span>English</span>
+              </div>
+              <div class="language-option" data-lang="hu">
+                <img src="https://flagcdn.com/w20/hu.png" alt="Hungarian Flag" class="w-5 h-auto">
+                <span>Magyar</span>
+              </div>
+            </div>
+          </div>
+          <button class="nav-button">
+            Connect Now
+          </button>
+        </div>
+
+        <!-- Mobile menu button and Language selector -->
+        <div class="flex md:hidden items-center space-x-4">
+          <div class="language-selector">
+            <button id="mobileLanguageButton" class="language-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <img id="mobileFlagIcon" src="https://flagcdn.com/w20/us.png" alt="US Flag" class="w-5 h-auto">
+            </button>
+            <div id="mobileLanguageDropdown" class="language-dropdown">
+              <div class="language-option" data-lang="en">
+                <img src="https://flagcdn.com/w20/us.png" alt="US Flag" class="w-5 h-auto">
+                <span>English</span>
+              </div>
+              <div class="language-option" data-lang="hu">
+                <img src="https://flagcdn.com/w20/hu.png" alt="Hungarian Flag" class="w-5 h-auto">
+                <span>Magyar</span>
+              </div>
+            </div>
+          </div>
+          <button id="mobileMenuButton" class="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="mobile-menu hidden">
+        <div class="flex flex-col py-4 px-4">
+          <a href="#home" class="py-3 text-white hover:text-fivem-orange transition-colors">Home</a>
+          <a href="#features" class="py-3 text-white hover:text-fivem-orange transition-colors">Features</a>
+          <a href="#about" class="py-3 text-white hover:text-fivem-orange transition-colors">About</a>
+          <a href="#join" class="py-3 text-white hover:text-fivem-orange transition-colors">Join Us</a>
+          <button class="mt-4 nav-button">Connect Now</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-background"></div>
+      <div class="hero-gradient-1"></div>
+      <div class="hero-gradient-2"></div>
+
+      <div class="container hero-content">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="flex-1 space-y-6 text-center md:text-left animate-fade-in" style="animation-delay: 0.3s">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+              Welcome to <span class="gradient-text">Advanced Roleplay</span>
+            </h1>
+            <p class="text-lg text-gray-300 max-w-lg mx-auto md:mx-0">
+              Experience the most immersive and realistic FiveM roleplay server with custom content, economy, and active staff.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+              <button class="nav-button px-8 py-6">
+                Join Now
+              </button>
+              <button class="border border-fivem-orange text-fivem-orange px-8 py-6 rounded-md hover:bg-fivem-orange-10 transition-all">
+                Learn More
+              </button>
+            </div>
+            <div class="hero-stats">
+              <div class="text-center">
+                <p class="text-3xl font-bold text-white">200+</p>
+                <p class="text-gray-400 text-sm">Active Players</p>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="text-center">
+                <p class="text-3xl font-bold text-white">50+</p>
+                <p class="text-gray-400 text-sm">Custom Jobs</p>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="text-center">
+                <p class="text-3xl font-bold text-white">24/7</p>
+                <p class="text-gray-400 text-sm">Support</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 opacity-0 animate-fade-in" style="animation-delay: 0.6s">
+            <div class="hero-image">
+              <div class="rounded-lg overflow-hidden shadow-2xl orange-glow animate-float">
+                <img
+                  src="https://i.imgur.com/0sq8qO3.jpg"
+                  alt="FiveM Server Screenshot"
+                  class="w-full h-auto rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-indicator">
+          <p class="text-white/50 mb-2">Scroll Down</p>
+          <div class="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
+            <div class="scroll-dot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding bg-fivem-gray-dark">
+      <div class="container mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            <span class="gradient-text">Server Features</span>
+          </h2>
+          <p class="text-gray-300">
+            Our server offers a unique roleplay experience with advanced features and custom content.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featuresGrid">
+          <!-- Features will be added dynamically with JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-background">
+        <div class="stats-gradient-1"></div>
+        <div class="stats-gradient-2"></div>
+      </div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-4" id="statsGrid">
+          <!-- Stats will be added dynamically with JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Server Section -->
+    <section id="join" class="section-padding bg-black">
+      <div class="container mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            <span class="gradient-text">Join Our Server</span>
+          </h2>
+          <p class="text-gray-300">
+            Follow these simple steps to join our FiveM roleplay server and start your adventure.
+          </p>
+        </div>
+        
+        <div class="server-status mb-16 bg-fivem-gray-light rounded-lg p-6">
+          <div>
+            <p class="text-gray-300 mb-2">Server Status</p>
+            <div class="flex items-center">
+              <span class="status-indicator status-online"></span>
+              <p class="text-xl font-bold text-white">Online</p>
+            </div>
+          </div>
+          
+          <div>
+            <p class="text-gray-300 mb-2">Server IP</p>
+            <div class="flex items-center">
+              <p class="text-xl font-bold text-white" id="serverIp">play.yourserver.com</p>
+              <button class="copy-button" onclick="copyServerIp()">
+                Copy
+              </button>
+            </div>
+          </div>
+          
+          <button class="nav-button mt-4 md:mt-0">
+            Connect Now
+          </button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="stepsGrid">
+          <!-- Steps will be added dynamically with JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-gradient-line"></div>
+      <div class="footer-gradient-1"></div>
+      <div class="footer-gradient-2"></div>
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div class="lg:col-span-1 opacity-0 animate-fade-in" style="animation-delay: 0.1s">
+            <h3 class="text-2xl font-bold gradient-text mb-6">FiveM Server</h3>
+            <p class="text-gray-400 mb-6">
+              Experience the most immersive roleplay server with custom content, active staff, and a friendly community.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="social-icon">
+                <span class="text-lg">📱</span>
+              </a>
+              <a href="#" class="social-icon">
+                <span class="text-lg">💬</span>
+              </a>
+              <a href="#" class="social-icon">
+                <span class="text-lg">📷</span>
+              </a>
+              <a href="#" class="social-icon">
+                <span class="text-lg">🎮</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="opacity-0 animate-fade-in" style="animation-delay: 0.2s">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="space-y-3">
+              <li><a href="#" class="footer-link">Home</a></li>
+              <li><a href="#features" class="footer-link">Features</a></li>
+              <li><a href="#about" class="footer-link">About</a></li>
+              <li><a href="#join" class="footer-link">Join Server</a></li>
+              <li><a href="#" class="footer-link">Rules</a></li>
+            </ul>
+          </div>
+
+          <div class="opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+            <h4 class="footer-title">Resources</h4>
+            <ul class="space-y-3">
+              <li><a href="#" class="footer-link">Discord Server</a></li>
+              <li><a href="#" class="footer-link">Donation Store</a></li>
+              <li><a href="#" class="footer-link">Server Rules</a></li>
+              <li><a href="#" class="footer-link">Community Forum</a></li>
+              <li><a href="#" class="footer-link">Development Blog</a></li>
+            </ul>
+          </div>
+
+          <div class="opacity-0 animate-fade-in" style="animation-delay: 0.4s">
+            <h4 class="footer-title">Contact Us</h4>
+            <ul class="space-y-3">
+              <li class="footer-contact-item">
+                <span class="contact-icon">📧</span>
+                <a href="mailto:info@yourserver.com" class="footer-link">info@yourserver.com</a>
+              </li>
+              <li class="footer-contact-item">
+                <span class="contact-icon">🌐</span>
+                <a href="#" class="footer-link">www.yourserver.com</a>
+              </li>
+              <li class="footer-contact-item">
+                <span class="contact-icon">💬</span>
+                <a href="#" class="footer-link">Join Discord</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom opacity-0 animate-fade-in" style="animation-delay: 0.5s">
+          <p class="text-gray-400">
+            &copy; <span id="currentYear">2023</span> Your FiveM Server. All rights reserved.
+          </p>
+          <div class="footer-policy-links">
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Language system
+    let currentLanguage = localStorage.getItem('language') || 'en';
+
+    const translations = {
+      en: {
+        'navbar.home': 'Home',
+        'navbar.features': 'Features',
+        'navbar.about': 'About',
+        'navbar.joinUs': 'Join Us',
+        'navbar.connectNow': 'Connect Now',
+        'hero.welcome': 'Welcome to',
+        'hero.roleplay': 'Advanced Roleplay',
+        'hero.description': 'Experience the most immersive and realistic FiveM roleplay server with custom content, economy, and active staff.',
+        'hero.joinNow': 'Join Now',
+        'hero.learnMore': 'Learn More',
+        'hero.activePlayers': 'Active Players',
+        'hero.customJobs': 'Custom Jobs',
+        'hero.support': 'Support',
+        'features.title': 'Server Features',
+        'features.description': 'Our server offers a unique roleplay experience with advanced features and custom content.',
+        'features.customEconomy': 'Custom Economy',
+        'features.economyDesc': 'Advanced economy system with jobs, realistic taxes, businesses, and more.',
+        'features.customVehicles': 'Custom Vehicles',
+        'features.vehiclesDesc': 'Over 300 custom vehicles with realistic handling and tuning options.',
+        'features.roleplayFocus': 'Roleplay Focus',
+        'features.roleplayDesc': 'Immersive roleplay experience with unique storylines and character development.',
+        'features.activeStaff': 'Active Staff',
+        'features.staffDesc': 'Our team is always online to help, monitor gameplay, and ensure rules are followed.',
+        'features.regularEvents': 'Regular Events',
+        'features.eventsDesc': 'Weekly events with rewards, competitions, and special activities.',
+        'features.customInteriors': 'Custom Interiors',
+        'features.interiorsDesc': 'Hundreds of custom interiors for a more immersive experience.',
+        'stats.activePlayers': 'Active Players',
+        'stats.customVehicles': 'Custom Vehicles',
+        'stats.customJobs': 'Custom Jobs',
+        'stats.serverUptime': 'Server Uptime',
+        'joinServer.title': 'Join Our Server',
+        'joinServer.description': 'Follow these simple steps to join our FiveM roleplay server and start your adventure.',
+        'joinServer.serverStatus': 'Server Status',
+        'joinServer.serverIp': 'Server IP',
+        'joinServer.copy': 'Copy',
+        'joinServer.connectNow': 'Connect Now',
+        'joinServer.activePlayers': 'Active Players',
+        'joinServer.step1': 'Download FiveM',
+        'joinServer.step1Desc': 'Download and install FiveM client from the official website.',
+        'joinServer.step2': 'Create Account',
+        'joinServer.step2Desc': 'Create an account on our website or Discord server.',
+        'joinServer.step3': 'Read Rules',
+        'joinServer.step3Desc': 'Familiarize yourself with our server rules to avoid any issues.',
+        'joinServer.step4': 'Connect & Play',
+        'joinServer.step4Desc': 'Enter our server IP in the FiveM client and start playing.',
+        'joinServer.learnMore': 'Learn More',
+        'footer.description': 'Experience the most immersive roleplay server with custom content, active staff, and a friendly community.',
+        'footer.quickLinks': 'Quick Links',
+        'footer.home': 'Home',
+        'footer.features': 'Features',
+        'footer.about': 'About',
+        'footer.joinServer': 'Join Server',
+        'footer.rules': 'Rules',
+        'footer.resources': 'Resources',
+        'footer.discordServer': 'Discord Server',
+        'footer.donationStore': 'Donation Store',
+        'footer.serverRules': 'Server Rules',
+        'footer.communityForum': 'Community Forum',
+        'footer.developmentBlog': 'Development Blog',
+        'footer.contactUs': 'Contact Us',
+        'footer.joinDiscord': 'Join Discord',
+        'footer.rights': 'All rights reserved.',
+        'footer.privacyPolicy': 'Privacy Policy',
+        'footer.termsOfService': 'Terms of Service',
+        'footer.cookiePolicy': 'Cookie Policy',
+        'loading.message': 'Loading assets...'
+      },
+      hu: {
+        'navbar.home': 'Főoldal',
+        'navbar.features': 'Funkciók',
+        'navbar.about': 'Rólunk',
+        'navbar.joinUs': 'Csatlakozás',
+        'navbar.connectNow': 'Csatlakozz most',
+        'hero.welcome': 'Üdvözlünk a',
+        'hero.roleplay': 'Fejlett Szerepjátékban',
+        'hero.description': 'Tapasztald meg a legvalósághűbb FiveM szerepjáték szervert egyedi tartalmakkal, gazdasági rendszerrel és aktív személyzettel.',
+        'hero.joinNow': 'Csatlakozz most',
+        'hero.learnMore': 'Tudj meg többet',
+        'hero.activePlayers': 'Aktív játékos',
+        'hero.customJobs': 'Egyedi munkák',
+        'hero.support': 'Támogatás',
+        'features.title': 'Szerver funkciók',
+        'features.description': 'Szerverünk egyedülálló szerepjáték élményt kínál fejlett funkciókkal és egyedi tartalommal.',
+        'features.customEconomy': 'Egyedi gazdaság',
+        'features.economyDesc': 'Fejlett gazdasági rendszer munkákkal, realisztikus adókkal, vállalkozásokkal és egyebekkel.',
+        'features.customVehicles': 'Egyedi járművek',
+        'features.vehiclesDesc': 'Több mint 300 egyedi jármű valósághű kezeléssel és tuningolási lehetőségekkel.',
+        'features.roleplayFocus': 'Szerepjáték fókusz',
+        'features.roleplayDesc': 'Magával ragadó szerepjáték élmény egyedi történetekkel és karakterfejlődéssel.',
+        'features.activeStaff': 'Aktív személyzet',
+        'features.staffDesc': 'Csapatunk mindig online, hogy segítsen, felügyelje a játékmenetet és biztosítsa a szabályok betartását.',
+        'features.regularEvents': 'Rendszeres események',
+        'features.eventsDesc': 'Heti események jutalmakkal, versenyekkel és különleges tevékenységekkel.',
+        'features.customInteriors': 'Egyedi belsők',
+        'features.interiorsDesc': 'Több száz egyedi belső tér egy még mélyebb élményért.',
+        'stats.activePlayers': 'Aktív játékos',
+        'stats.customVehicles': 'Egyedi járművek',
+        'stats.customJobs': 'Egyedi munkák',
+        'stats.serverUptime': 'Szerver üzemidő',
+        'joinServer.title': 'Csatlakozz a szerverhez',
+        'joinServer.description': 'Kövesd ezeket az egyszerű lépéseket, hogy csatlakozz a FiveM szerepjáték szerverünkhöz és kezdd el a kalandot.',
+        'joinServer.serverStatus': 'Szerver állapot',
+        'joinServer.serverIp': 'Szerver IP',
+        'joinServer.copy': 'Másolás',
+        'joinServer.connectNow': 'Csatlakozás most',
+        'joinServer.activePlayers': 'Aktív játékosok',
+        'joinServer.step1': 'FiveM letöltése',
+        'joinServer.step1Desc': 'Töltsd le és telepítsd a FiveM klienst a hivatalos weboldalról.',
+        'joinServer.step2': 'Fiók létrehozása',
+        'joinServer.step2Desc': 'Hozz létre egy fiókot a weboldalunkon vagy a Discord szerverünkön.',
+        'joinServer.step3': 'Olvasd el a szabályokat',
+        'joinServer.step3Desc': 'Ismerkedj meg a szerver szabályaival a problémák elkerülése érdekében.',
+        'joinServer.step4': 'Csatlakozás & Játék',
+        'joinServer.step4Desc': 'Add meg a szerver IP-címét a FiveM kliensben és kezdj el játszani.',
+        'joinServer.learnMore': 'Tudj meg többet',
+        'footer.description': 'Tapasztald meg a legélethűbb szerepjáték szervert egyedi tartalmakkal, aktív személyzettel és barátságos közösséggel.',
+        'footer.quickLinks': 'Gyors linkek',
+        'footer.home': 'Főoldal',
+        'footer.features': 'Funkciók',
+        'footer.about': 'Rólunk',
+        'footer.joinServer': 'Csatlakozás',
+        'footer.rules': 'Szabályok',
+        'footer.resources': 'Erőforrások',
+        'footer.discordServer': 'Discord szerver',
+        'footer.donationStore': 'Adományozási bolt',
+        'footer.serverRules': 'Szerver szabályzat',
+        'footer.communityForum': 'Közösségi fórum',
+        'footer.developmentBlog': 'Fejlesztői blog',
+        'footer.contactUs': 'Kapcsolat',
+        'footer.joinDiscord': 'Csatlakozz Discordon',
+        'footer.rights': 'Minden jog fenntartva.',
+        'footer.privacyPolicy': 'Adatvédelmi irányelvek',
+        'footer.termsOfService': 'Felhasználási feltételek',
+        'footer.cookiePolicy': 'Cookie szabályzat',
+        'loading.message': 'Tartalom betöltése...'
+      }
+    };
+
+    // Helper function to get translated text
+    function t(key) {
+      return translations[currentLanguage][key] || key;
+    }
+
+    function updateLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.setItem('language', lang);
+
+      // Update flag icons
+      const flagUrl = lang === 'en' ? 'https://flagcdn.com/w20/us.png' : 'https://flagcdn.com/w20/hu.png';
+      document.getElementById('currentFlag').src = flagUrl;
+      document.getElementById('mobileFlagIcon').src = flagUrl;
+      
+      // Update page title
+      document.title = lang === 'en' ? 'FiveM Server - Advanced Roleplay' : 'FiveM Szerver - Fejlett Szerepjáték';
+      
+      // Update translatable elements
+      updateTranslations();
+      
+      // Update language options highlighting
+      updateLanguageDropdownHighlighting();
+    }
+
+    function updateLanguageDropdownHighlighting() {
+      const options = document.querySelectorAll('.language-option');
+      options.forEach(option => {
+        if (option.getAttribute('data-lang') === currentLanguage) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    }
+
+    // Features data
+    const featuresList = [
+      {
+        title: "customEconomy",
+        description: "economyDesc",
+        icon: "💰",
+      },
+      {
+        title: "customVehicles",
+        description: "vehiclesDesc",
+        icon: "🚗",
+      },
+      {
+        title: "roleplayFocus",
+        description: "roleplayDesc",
+        icon: "🎭",
+      },
+      {
+        title: "activeStaff",
+        description: "staffDesc",
+        icon: "👮",
+      },
+      {
+        title: "regularEvents",
+        description: "eventsDesc",
+        icon: "🎉",
+      },
+      {
+        title: "customInteriors",
+        description: "interiorsDesc",
+        icon: "🏢",
+      },
+    ];
+
+    // Stats data
+    const statsList = [
+      { value: 350, label: "activePlayers", suffix: "+" },
+      { value: 300, label: "customVehicles", suffix: "+" },
+      { value: 75, label: "customJobs", suffix: "+" },
+      { value: 99.9, label: "serverUptime", suffix: "%" }
+    ];
+
+    // Join server steps data
+    const steps = [
+      {
+        title: "step1",
+        description: "step1Desc",
+        link: "https://fivem.net/"
+      },
+      {
+        title: "step2",
+        description: "step2Desc",
+        link: "#"
+      },
+      {
+        title: "step3",
+        description: "step3Desc",
+        link: "#"
+      },
+      {
+        title: "step4",
+        description: "step4Desc",
+        link: "#"
+      }
+    ];
+
+    // Update all translated elements
+    function updateTranslations() {
+      // Navbar
+      document.querySelectorAll('.nav-link').forEach((link, index) => {
+        const keys = ['navbar.home', 'navbar.features', 'navbar.about', 'navbar.joinUs'];
+        link.textContent = t(keys[index % keys.length]);
+      });
+      
+      document.querySelectorAll('.nav-button').forEach(button => {
+        button.textContent = t('navbar.connectNow');
+      });
+
+      // Hero section
+      document.querySelector('#home h1').innerHTML = `${t('hero.welcome')} <span class="gradient-text">${t('hero.roleplay')}</span>`;
+      document.querySelector('#home p.text-lg').textContent = t('hero.description');
+      document.querySelector('#home .flex.flex-col.sm\\:flex-row button:first-child').textContent = t('hero.joinNow');
+      document.querySelector('#home .flex.flex-col.sm\\:flex-row button:last-child').textContent = t('hero.learnMore');
+      
+      const heroStats = document.querySelectorAll('.hero-stats .text-gray-400');
+      heroStats[0].textContent = t('hero.activePlayers');
+      heroStats[1].textContent = t('hero.customJobs');
+      heroStats[2].textContent = t('hero.support');
+      
+      document.querySelector('.scroll-indicator p').textContent = t('navbar.home');
+
+      // Features section
+      document.querySelector('#features h2 .gradient-text').textContent = t('features.title');
+      document.querySelector('#features .text-center > p').textContent = t('features.description');
+      
+      renderFeatures();
+
+      // Stats section
+      renderStats();
+
+      // Join server section
+      document.querySelector('#join h2 .gradient-text').textContent = t('joinServer.title');
+      document.querySelector('#join .text-center > p').textContent = t('joinServer.description');
+      
+      document.querySelector('.server-status > div:first-child > p').textContent = t('joinServer.serverStatus');
+      document.querySelector('.server-status > div:nth-child(2) > p').textContent = t('joinServer.serverIp');
+      document.querySelector('.copy-button').textContent = t('joinServer.copy');
+      document.querySelector('.server-status > button').textContent = t('joinServer.connectNow');
+      
+      renderSteps();
+
+      // Footer
+      document.querySelector('.footer p.text-gray-400').textContent = t('footer.description');
+      
+      const footerTitles = document.querySelectorAll('.footer-title');
+      footerTitles[0].textContent = t('footer.quickLinks');
+      footerTitles[1].textContent = t('footer.resources');
+      footerTitles[2].textContent = t('footer.contactUs');
+      
+      const quickLinks = document.querySelectorAll('.footer-title:first-of-type + ul a');
+      quickLinks[0].textContent = t('footer.home');
+      quickLinks[1].textContent = t('footer.features');
+      quickLinks[2].textContent = t('footer.about');
+      quickLinks[3].textContent = t('footer.joinServer');
+      quickLinks[4].textContent = t('footer.rules');
+      
+      const resourceLinks = document.querySelectorAll('.footer-title:nth-of-type(2) + ul a');
+      resourceLinks[0].textContent = t('footer.discordServer');
+      resourceLinks[1].textContent = t('footer.donationStore');
+      resourceLinks[2].textContent = t('footer.serverRules');
+      resourceLinks[3].textContent = t('footer.communityForum');
+      resourceLinks[4].textContent = t('footer.developmentBlog');
+      
+      const contactLinks = document.querySelectorAll('.footer-contact-item a');
+      contactLinks[2].textContent = t('footer.joinDiscord');
+      
+      document.querySelector('.footer-bottom > p').innerHTML = 
+        `&copy; <span id="currentYear">${new Date().getFullYear()}</span> Your FiveM Server. ${t('footer.rights')}`;
+      
+      const policyLinks = document.querySelectorAll('.footer-policy-links a');
+      policyLinks[0].textContent = t('footer.privacyPolicy');
+      policyLinks[1].textContent = t('footer.termsOfService');
+      policyLinks[2].textContent = t('footer.cookiePolicy');
+      
+      // Loading section
+      document.getElementById('loadingMessage').textContent = t('loading.message');
+    }
+
+    // Render feature cards
+    function renderFeatures() {
+      const featuresGrid = document.getElementById('featuresGrid');
+      featuresGrid.innerHTML = '';
+      
+      featuresList.forEach((feature, index) => {
+        const featureCard = document.createElement('div');
+        featureCard.className = 'feature-card';
+        featureCard.style.animationDelay = `${index * 0.15}s`;
+        
+        featureCard.innerHTML = `
+          <div class="feature-icon">
+            ${feature.icon}
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-white">${t('features.' + feature.title)}</h3>
+          <p class="text-gray-300">${t('features.' + feature.description)}</p>
+        `;
+        
+        featuresGrid.appendChild(featureCard);
+      });
+      
+      // Trigger animation when in viewport
+      setTimeout(() => {
+        document.querySelectorAll('.feature-card').forEach(card => {
+          card.classList.add('animate-fade-in');
+        });
+      }, 300);
+    }
+
+    // Render stats
+    function renderStats() {
+      const statsGrid = document.getElementById('statsGrid');
+      statsGrid.innerHTML = '';
+      
+      statsList.forEach(stat => {
+        const statItem = document.createElement('div');
+        statItem.className = 'stat-counter';
+        
+        statItem.innerHTML = `
+          <p class="text-4xl md:text-5xl font-bold gradient-text mb-2" data-value="${stat.value}" data-suffix="${stat.suffix}">0${stat.suffix}</p>
+          <p class="text-gray-300">${t('stats.' + stat.label)}</p>
+        `;
+        
+        statsGrid.appendChild(statItem);
+      });
+      
+      // Start counter animation when in viewport
+      animateStats();
+    }
+
+    // Render join steps
+    function renderSteps() {
+      const stepsGrid = document.getElementById('stepsGrid');
+      stepsGrid.innerHTML = '';
+      
+      steps.forEach((step, index) => {
+        const stepCard = document.createElement('div');
+        stepCard.className = 'step-card';
+        stepCard.style.animationDelay = `${index * 0.2}s`;
+        
+        stepCard.innerHTML = `
+          <div class="step-number">${index + 1}</div>
+          <h3 class="text-xl font-bold mb-3 mt-2 text-white">${t('joinServer.' + step.title)}</h3>
+          <p class="text-gray-300 mb-4">${t('joinServer.' + step.description)}</p>
+          ${step.link ? `<a href="${step.link}" target="_blank" rel="noopener noreferrer" class="text-fivem-orange hover:text-fivem-orange-dark">${t('joinServer.learnMore')} →</a>` : ''}
+        `;
+        
+        stepsGrid.appendChild(stepCard);
+      });
+      
+      // Trigger animation when in viewport
+      setTimeout(() => {
+        document.querySelectorAll('.step-card').forEach(card => {
+          card.classList.add('animate-fade-in');
+        });
+      }, 300);
+    }
+
+    // Animate stats counters
+    function animateStats() {
+      document.querySelectorAll('.stat-counter [data-value]').forEach(statElement => {
+        const value = parseFloat(statElement.dataset.value);
+        const suffix = statElement.dataset.suffix;
+        const duration = 2000; // ms
+        const start = 0;
+        const increment = value / 100;
+        let current = start;
+        let startTime = null;
+        
+        function updateStat(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const progress = timestamp - startTime;
+          
+          current = start + (increment * (progress / (duration / 100)));
+          if (current <= value) {
+            statElement.textContent = `${Math.floor(current)}${suffix}`;
+            requestAnimationFrame(updateStat);
+          } else {
+            statElement.textContent = `${value}${suffix}`;
+          }
+        }
+        
+        // Start animation when element is in viewport
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              requestAnimationFrame(updateStat);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        observer.observe(statElement);
+      });
+    }
+
+    // Navbar scroll effect
+    function handleNavbarScroll() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+      
+      const menuButton = document.getElementById('mobileMenuButton');
+      if (mobileMenu.classList.contains('hidden')) {
+        menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+      } else {
+        menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      }
+    }
+
+    // Language dropdown toggle
+    function toggleLanguageDropdown(dropdownId) {
+      const dropdown = document.getElementById(dropdownId);
+      dropdown.classList.toggle('show');
+    }
+
+    // Server IP copy function
+    function copyServerIp() {
+      const ip = document.getElementById('serverIp').textContent;
+      navigator.clipboard.writeText(ip)
+        .then(() => {
+          alert('Server IP copied to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    }
+
+    // Loading screen animation
+    function simulateLoading() {
+      let progress = 0;
+      const progressBar = document.getElementById('loadingProgressBar');
+      const percentage = document.getElementById('loadingPercentage');
+      const loadingScreen = document.getElementById('loadingScreen');
+      
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          
+          setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+              document.body.classList.remove('overflow-hidden');
+            }, 300);
+          }, 500);
+        }
+        
+        progressBar.style.width = `${progress}%`;
+        percentage.textContent = `${Math.floor(progress)}%`;
+      }, 200);
+      
+      document.body.classList.add('overflow-hidden');
+    }
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update current year
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      
+      // Apply saved language
+      updateLanguage(currentLanguage);
+      
+      // Loading screen
+      simulateLoading();
+      
+      // Navbar scroll event
+      window.addEventListener('scroll', handleNavbarScroll);
+      
+      // Mobile menu event
+      document.getElementById('mobileMenuButton').addEventListener('click', toggleMobileMenu);
+      
+      // Language dropdown events
+      document.getElementById('languageButton').addEventListener('click', () => toggleLanguageDropdown('languageDropdown'));
+      document.getElementById('mobileLanguageButton').addEventListener('click', () => toggleLanguageDropdown('mobileLanguageDropdown'));
+      
+      // Language selection events
+      document.querySelectorAll('.language-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const lang = option.getAttribute('data-lang');
+          updateLanguage(lang);
+          document.getElementById('languageDropdown').classList.remove('show');
+          document.getElementById('mobileLanguageDropdown').classList.remove('show');
+        });
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('mobileMenuButton').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+          }
+        });
+      });
+      
+      // Close language dropdowns when clicking outside
+      document.addEventListener('click', (e) => {
+        const desktopButton = document.getElementById('languageButton');
+        const mobileButton = document.getElementById('mobileLanguageButton');
+        const desktopDropdown = document.getElementById('languageDropdown');
+        const mobileDropdown = document.getElementById('mobileLanguageDropdown');
+        
+        if (!desktopButton.contains(e.target) && !desktopDropdown.contains(e.target)) {
+          desktopDropdown.classList.remove('show');
+        }
+        
+        if (!mobileButton.contains(e.target) && !mobileDropdown.contains(e.target)) {
+          mobileDropdown.classList.remove('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
