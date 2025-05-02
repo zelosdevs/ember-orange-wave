@@ -36,7 +36,6 @@ const JoinServer = () => {
   }, []);
 
   const [serverStatus, setServerStatus] = useState("Online");
-  const [playerCount, setPlayerCount] = useState(142);
   
   const steps = [
     {
@@ -90,11 +89,6 @@ const JoinServer = () => {
                 {t('joinServer.copy')}
               </Button>
             </div>
-          </div>
-          
-          <div>
-            <p className="text-gray-300 mb-2">{t('joinServer.activePlayers')}</p>
-            <p className="text-xl font-bold text-white">{playerCount}<span className="text-gray-400">/256</span></p>
           </div>
           
           <Button className="orange-gradient text-white font-medium px-8 py-2 rounded-md hover:brightness-110 transition-all duration-300 mt-4 md:mt-0">
